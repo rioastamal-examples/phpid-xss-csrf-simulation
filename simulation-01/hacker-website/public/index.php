@@ -2,10 +2,9 @@
 
 // PHP Built-in web server router
 if (php_sapi_name() === 'cli-server') {
-    if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js|xml|txt)$/', $_SERVER['SCRIPT_FILENAME'])) {
-        if (file_exists($_SERVER['SCRIPT_FILENAME'])) {
-            return false;
-        }
+    $me = realpath(__FILE__);
+    if (file_exists($_SERVER['SCRIPT_FILENAME']) && $_SERVER['SCRIPT_FILENAME'] !== $me) {
+        return false;
     }
 }
 
@@ -38,6 +37,8 @@ if ($path === 'collect') {
     $json = json_decode($json, $_toArray = true);
     $json['date'] = (new DateTime('now', new DateTimeZone('Asia/Jakarta')))->format('c');
     $json = json_encode($json, JSON_UNESCAPED_SLASHES);
+
+    // Send notification via Slack or Telegram or whatever
 
     file_put_contents('php://stderr', $json);
     file_put_contents(BASEPATH . '/data.txt', $json . "\n", FILE_APPEND);

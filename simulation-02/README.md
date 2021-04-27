@@ -39,4 +39,6 @@ $ php -S 0.0.0.0:8083 \
 phpid-xss-csrf-simulation/simulation-02/hacker-website/public/index.php
 ```
 
-Untuk detil cara menjalankan serangan silahkan baca pada slide presentasi.
+Untuk detil cara menjalankan serangan dapat dibaca pada slide presentasi.
+
+Chrome versi &gt;= 80 dan Firefox versi &gt;= 75 memiliki policy SameSite Cookie yang tidak memungkinkan terjadinya serangnan CSRF yang digunakan pada simulasi ini. Untuk itu gunakan versi dibawahnya atau disable SameSite Cookie policy untuk mengetes. Pada chrome dapat menggunakan [chrome://flags/#same-site-by-default-cookies](chrome://flags/#same-site-by-default-cookies).

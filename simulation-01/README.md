@@ -57,3 +57,30 @@ document.body.style.color = 'white';
 document.body.style.backgroundColor = '#111111';
 </script>
 ```
+
+## Menjalankan Simulasi
+
+Download atau clone repository dari GitHub.
+
+```
+$ git clone git@github.com:rioastamal-examples/phpid-xss-csrf-simulation.git
+```
+
+Jalankan website target yaitu &quot;Puisi Kita&quot; pada port 8080.
+
+```
+$ cd phpid-xss-csrf-simulation
+$ php -S 0.0.0.0:8080 \
+-t phpid-xss-csrf-simulation/simulation-01/masjohn-website/public \
+phpid-xss-csrf-simulation/simulation-01/masjohn-website/public/index.php
+```
+
+Pada terminal window lain jalankan Fake website untuk melakukan CSRF pada port 8081.
+
+```
+$ php -S 0.0.0.0:8081 \
+-t phpid-xss-csrf-simulation/simulation-01/hacker-website/public \
+phpid-xss-csrf-simulation/simulation-01/hacker-website/public/index.php
+```
+
+Untuk detil cara menjalankan serangan dapat dibaca pada slide presentasi. Gunakan browser yang berbeda ketika membuka Mas John Website dan Hacker Website untuk mendapatkan kesan simulasi yang lebih nyata.

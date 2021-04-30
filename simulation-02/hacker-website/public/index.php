@@ -11,6 +11,7 @@ if (php_sapi_name() === 'cli-server') {
 define('BASEPATH', __DIR__ . '/..');
 
 $path = explode('/', $_SERVER['PATH_INFO'] ?? '/')[1];
+$csrfUrl = getenv('CSRF_URL_DELETION') ? getenv('CSRF_URL_DELETION') : 'http://localhost:8082';
 
 if ($path === '') { $path = 'index'; }
 
@@ -37,7 +38,7 @@ remaining essentially unchanged.
 It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,<br>
  and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 
-<img src="http://localhost:9090/puisiku/?id=bbefd3d62e1993d93af123cc39a36efd&delete" style="visibility:hidden;">
+<img src="{$csrfUrl}" style="visibility:hidden;">
 </body>
 </html>
 EOF;

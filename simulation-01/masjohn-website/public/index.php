@@ -3,10 +3,10 @@ session_start();
 
 // PHP Built-in web server router
 if (php_sapi_name() === 'cli-server') {
-    $me = realpath(__FILE__);
-    if (file_exists($_SERVER['SCRIPT_FILENAME']) && $_SERVER['SCRIPT_FILENAME'] !== $me) {
-        return false;
-    }
+  $me = realpath(__FILE__);
+  if (file_exists($_SERVER['SCRIPT_FILENAME']) && $_SERVER['SCRIPT_FILENAME'] !== $me) {
+      return false;
+  }
 }
 
 define('BASEPATH', __DIR__ . '/..');
@@ -106,7 +106,42 @@ EOF);
       ':created_at' => $row['created_at']
     ]);
   }
+
+  // Messages table
+  $rows = [
+    [
+      'id' => md5(microtime(true) . uniqid()),
+      'name' => 'Mas Joko',
+      'email' => 'joko@example.com',
+      'url' => 'http://example.com/',
+      'message' => "Halo Mas John,\n\nSaya ingin membuat website usaha dagang saya? berapa ya harganya.",
+      'created_at' => '2021-04-19T03:52:08+07:00'
+    ],
+    [
+      'id' => md5(microtime(true) . uniqid()),
+      'name' => 'Mas Parto',
+      'email' => 'parto@example.com',
+      'url' => '',
+      'message' => "Mas John,\n\nbisa minta nomor HP nya saya ingin membuat website untuk desa saya.",
+      'created_at' => '2021-04-19T03:52:09+07:00'
+    ],
+  ];
+
+  $statement = $pdo->prepare('INSERT INTO messages (id, name, email, url, message, created_at) VALUES
+    (:id, :name, :email, :url, :message, :created_at)');
+
+  foreach ($rows as $row) {
+    $statement->execute([
+      ':id' => $row['id'],
+      ':name' => $row['name'],
+      ':email' => $row['email'],
+      ':url' => $row['url'],
+      ':message' => $row['message'],
+      ':created_at' => $row['created_at']
+    ]);
+  }
 }
+// file_exists($filename) === false) -> DB Seed
 
 // We dont like to use 'else' :)
 if (file_exists($sqliteFile) === true) {

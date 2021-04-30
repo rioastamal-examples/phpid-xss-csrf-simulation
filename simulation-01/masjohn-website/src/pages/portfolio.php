@@ -1,7 +1,10 @@
 <?php
 
 $loggedIn = $_SESSION['logged_in'] ?? false;
-if ($loggedIn !== true) {
+$originIp = $_SESSION['origin_ip'] ?? '0.0.0.0';
+$currentIp = $_SERVER['REMOTE_ADDR'];
+
+if ($loggedIn !== true || $originIp !== $currentIp) {
     header('HTTP/1.1 403 Access Forbidden');
     echo <<<EOF
 <!DOCTYPE html>

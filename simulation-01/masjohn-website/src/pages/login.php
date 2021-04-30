@@ -25,6 +25,8 @@ $password = $_POST['password'] ?? '';
 
 if ($username === $credentials['username'] && password_verify($password, $credentials['hash']) === true) {
     $_SESSION['logged_in'] = true;
+    $_SESSION['origin_ip'] = $_SERVER['REMOTE_ADDR'];
+
     echo 'Redirecting...';
     header('Location: /');
     exit(0);

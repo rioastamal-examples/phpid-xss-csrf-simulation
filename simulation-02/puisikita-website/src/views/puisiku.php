@@ -21,7 +21,7 @@
       <div class="column column-70">
         <p>
             <button class="button button-outline"><?= (int)$_poetry['likes'] ?> Likes</button>
-            <a href="/puisiku/?id=<?= htmlentities($_poetry['id'], ENT_QUOTES) ?>&delete" class="button delete-poetry">Hapus</a>
+            <a href="/puisiku/?id=<?= htmlentities($_poetry['id'], ENT_QUOTES) ?>&delete&token=<?= htmlentities($currentCsrfToken) ?>" class="button delete-poetry">Hapus</a>
         </p>
       </div>
     </div>

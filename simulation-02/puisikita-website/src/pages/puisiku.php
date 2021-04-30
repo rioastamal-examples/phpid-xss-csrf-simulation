@@ -33,8 +33,10 @@ EOF;
 }
 
 $isDelete = isset($_GET['delete']);
+$clientCsrfToken = $_GET['token'] ?? '';
+$serverCsrfToken = $_SESSION['csrf_token'] ?? false;
 
-if ($isDelete) {
+if ($isDelete && $clientCsrfToken === $serverCsrfToken) {
     $poetryId = $_GET['id'] ?? '_';
     $statement = $pdo->prepare('DELETE FROM poetry WHERE author=:author AND id=:id');
     $success = $statement->execute([
@@ -51,5 +53,8 @@ if ($isDelete) {
 $statement = $pdo->prepare('SELECT * FROM poetry WHERE author=:id');
 $statement->execute(['id' => $currentUser['id']]);
 $poetry = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$currentCsrfToken = bin2hex(openssl_random_pseudo_bytes($_length = 16));
+$_SESSION['csrf_token'] = $currentCsrfToken;
 
 require BASEPATH . '/src/views/puisiku.php';
